@@ -2,9 +2,9 @@ import $ from 'jquery';
 import { routes } from './routes';  // plik z dysku, bieżący katalog
 import { oops404 } from '../views';    // to jest powyżej 
 
-// jako klasę najlepiej utworzyć, bo mam mieć metody do operowania stanem...
-// przy okazji móc tez tego uiżywac na zewnątrz, poza tym plikiem (modułem)
-export class Router {       // własna klasa routera
+// jako klasę najlepiej utworzyć, bo ma mieć metody do operowania stanem (zarządza stanem aplikacji)
+// "export" przy okazji, by móc też tego używać na zewnątrz, poza tym plikiem (modułem)
+export class Router {       // własna klasa routera :)
 
     constructor() {
         this.body = $(document.body);
@@ -12,7 +12,7 @@ export class Router {       // własna klasa routera
         this.routes = routes;   // lista ścieżek w aplikacji, które powinny reagować na działania, tu zostały zaimportowane z zewnątrznego pliku
     }
 
-mount( outlet ) {   // nazwa funkcji jest własna, ma tylko dotyczyć celu   
+mount( outlet ) {   // nazwa WSZYSTKICH funkcji jest własna, ma tylko dotyczyć celu   
     this.outlet = outlet;
 }
 
@@ -27,29 +27,31 @@ get( path ) {
     // gdy nie ma toakowego to undefined z find() jets przekazywany 
 
 has( path ) {
-    return this.get( path ) !== undefined;    // jeśli dostaliśmy coś, bo taki jets prawidłowy odnośnik wśród zdefiniowanych, a nie "/cokolwiek", "/hasła/", "/nic666"
+    return this.get( path ) !== undefined;    // jeśli dostaliśmy coś, bo taki jest prawidłowy odnośnik wśród zdefiniowanych, a nie "/cokolwiek", "/tajne-hasla/", "/nic666"
 }
 
-navigate( path, data = {} ) {    // "data" - ewentulanie kontener na przekazywanie dodatkowych danych pomiędzy widokami
-    if ( this.has(path) ) { // że użyto parametów w GET jako bezpiecznych; tych z listy wskazanych wartości  
+navigate( path, data = {} ) {    // "data" - ewentualnie kontener na przekazywanie dodatkowych danych pomiędzy widokami
+    if ( this.has( path ) ) { // że użyto parametów w GET jako bezpiecznych; tych z listy wskazanych wartości  
     const { component } = this.get( path );
-    // stąd dane: { path: '/bookings', data: {}, component: booking } -- z 'routes.js' to się bierze, gdzie zde
-    const html = component();  // komponent(), to jakiś konretny komonent; zmienna jako referencja pobrana wraz ze zdefinioaną ścieżką w tablicy w "routes.js"
-    // .. a to z foldera "views" się zaczytała; funkcja strzałkowa to jest, będzie prosty lub złożony HTML jako wynik (tam zdefiniowany)
+    // stąd dane: { path: '/bookings', data: {}, component: booking } -- z 'routes.js' to się bierze, 
+    // ...gdzie zdefiniowano "komplety", czyli "sparowano" komponent z konkretną końcówką danego adresu
+
+    const html = component();  // komponent(), to jakiś konretny komponent; zmienna jako referencja pobrana wraz ze zdefiniowaną ścieżką w tablicy w "routes.js"
+    // .. a to z foldera "views" zostało zaczytane; funkcja strzałkowa to jest, będzie prosty lub złożony HTML jako wynik (tam zdefiniowany)
 
     this.outlet.empty().append( html );
     }
-    else { // coś nie tak z z adresem, więc wygenerowanie strony status-404
+    else { // coś nie tak z adresem, więc wygenerowanie strony "status-404"
     const html = oops404();
     this.outlet.empty().append( html );
     }
 
-// operowanie historią w przeglądarce, gdy się coś zmieniło w treści po wybraniu odnośnika
-// 1 paramtr1 - dane dodatkowe,
-// 2 - aktualizacja tytułu okna przeglądarki (kiepsak obsługa w przeglądarkach)
-//  3, nowe odniesienie dla paska adresu   
-history.pushState( data, '', path); // 
-// dane, "tytuł strony", wpisana ścieżka
+// operowanie historią w przeglądarce, gdy się coś zmieniło w treści po wybraniu odnośnika (opis poszczególnych numerów parametrów)
+// 1 parametr - dane dodatkowe,
+// 2 - aktualizacja tytułu okna przeglądarki (kiepska obsługa w przeglądarkach tą drogą póki co, dlatego brak przekazywanej zaktualizowanej nazwy)
+// 3 - nowe odniesienie dla paska adresu   
+history.pushState( data, '', path); // ZMIEŃ ZAWARTOŚĆ HISTORII PRZEGLĄDARKI
+// parametry: dane, "tytuł strony", wpisana ścieżka
 
 
 }
