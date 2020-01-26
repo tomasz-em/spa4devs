@@ -19,7 +19,7 @@ mount( outlet ) {   // nazwa WSZYSTKICH funkcji jest własna, ma tylko dotyczyć
     // dodanie nasłuchiwania na konkretne zdarzenie zmiany ścieżki (pierwsze własne zdarzenie)
     // posiadamy "kopię" <body> w jQ, zatem można do niego podpiąc to nasłuchiwanie
     this.body.on( routeChange, ( evt, detail ) => {   // nie tylko obiekt zdarzenia, ale też argument z danymi funckji trigger() jest przekazywany (dalej z tego ustawienia, jakiś pakunek, paczka danych) 
-        console.log(evt);
+        console.log(evt);   // NIC SIĘ NIE LOGUJE!!!!
         this.navigate( detail.path );   // a te dane końcówki URLa to przekazano uprzednio do emitowania
     });
 }
