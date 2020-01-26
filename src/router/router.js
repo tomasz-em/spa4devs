@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import { routes } from './routes';  // plik z dysku, bieżący katalog
 import { oops404 } from '../views';    // to jest powyżej 
+import { routeChange } from './route-change';   // auto-import ;)
 
 // jako klasę najlepiej utworzyć, bo ma mieć metody do operowania stanem (zarządza stanem aplikacji)
 // "export" przy okazji, by móc też tego używać na zewnątrz, poza tym plikiem (modułem)
@@ -14,6 +15,13 @@ export class Router {       // własna klasa routera :)
 
 mount( outlet ) {   // nazwa WSZYSTKICH funkcji jest własna, ma tylko dotyczyć celu   
     this.outlet = outlet;
+
+    // dodanie nasłuchiwania na konkretne zdarzenie zmiany ścieżki (pierwsze własne zdarzenie)
+    // posiadamy "kopię" <body> w jQ, zatem można do niego podpiąc to nasłuchiwanie
+    this.body.on( routeChange, ( evt, detail ) => {   // nie tylko obiekt zdarzenia, ale też argument z danymi funckji trigger() jest przekazywany (dalej z tego ustawienia, jakiś pakunek, paczka danych) 
+        console.log(evt);
+        this.navigate( detail.path );   // a te dane końcówki URLa to przekazano uprzednio do emitowania
+    });
 }
 
 init() {    // użyteczne w przypisaniu czegoś od razu do paska adresu (jeśli np. jesteśmy w jakiejś podstronie)
