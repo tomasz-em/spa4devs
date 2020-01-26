@@ -1,6 +1,7 @@
     // dołączenia głównych treści zewnętrznych 
 import 'bootstrap/dist/css/bootstrap.css';  // #1 - tu najpierw bilioteki stylów (ogólne zdefiniowane style zewnątrzne)
-import './it-spa.css';  // #2, kolejno: bezpośredni import głównego pliku stylów (własne definicje) by ewentulanie nadpisać już zdefiniowane (kaskadowaść a style domyślne)
+import './it-spa.scss';  // #2, kolejno: bezpośredni import głównego pliku stylów (własne definicje) by ewentulanie nadpisać już zdefiniowane (kaskadowaść a style domyślne)
+    // teraz SASS zamiast zwykłego CSS
 import $ from 'jquery';     // skoro używamyj Query, to przed pierwszym odwołaniem potrzebny takowy zewnętrzny zasób 
 import { Router } from './router/router';   // a to najważniejsza zdefiniowana klasa do obsługi tej witryny SPA - zasób lokalny z dysku
 
