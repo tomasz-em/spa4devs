@@ -6,4 +6,4 @@ export * from './rooms';
 export * from './treatments';
 export * from './oops-404';     // tu też zawarto ogólną zawartość dla strony o "statusie-404"
 
-// reeksport jest tu wywołany, wskazano wszysttkie widoki na tej liście 
+// reeksport jest tu wywołany, wskazano wszystkie widoki na tej liście 

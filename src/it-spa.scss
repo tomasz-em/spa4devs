@@ -20,6 +20,10 @@ nav a.btn {
     color: #ddd;
 }
 
+nav a.btn:hover {
+    font-weight: bold;
+    color: #a77;
+}
 
 footer {
     background-color: #eaeaea;
@@ -56,4 +60,28 @@ p.error {
     color: red;
     border: 2px dashed red;
     margin: 0.5rem;
+}
+
+.cart {
+    background-color: #444;
+    color: #dd5;
+}
+
+.cart h3 {
+    margin-bottom: 0;
+}
+
+.cart p {
+    display: none;
+    margin: 0;
+    padding: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.cart:hover p {
+    display: block;
+}
+
+.cart p > span {
+    font-weight: bolder;
 }

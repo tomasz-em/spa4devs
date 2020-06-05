@@ -46,6 +46,12 @@ navigate( path, data = {} ) {    // "data" - ewentualnie kontener na przekazywan
 
     const html = component();  // komponent(), to jakiś konretny komponent; zmienna jako referencja pobrana wraz ze zdefiniowaną ścieżką w tablicy w "routes.js"
     // .. a to z foldera "views" zostało zaczytane; funkcja strzałkowa to jest, będzie prosty lub złożony HTML jako wynik (tam zdefiniowany)
+   
+            // A PONIŻEJ TO NALEZY TAK ZASTĄPIĆ średnik powyżej, by operowało to na promesach 
+        /*  .then( html => {
+            this.outlet.empty().append(html);
+        }) */
+
 
     this.outlet.empty().append( html );
     }

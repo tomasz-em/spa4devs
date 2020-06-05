@@ -5,6 +5,7 @@ import './it-spa.scss';  // #2, kolejno: bezpośredni import głównego pliku st
 import $ from 'jquery';     // skoro używamyj Query, to przed pierwszym odwołaniem potrzebny takowy zewnętrzny zasób 
 import { Router } from './router/router';   // a to najważniejsza zdefiniowana klasa do obsługi tej witryny SPA - zasób lokalny z dysku
 import { nav } from './navigation/nav'; // potrzebny import komponentu
+// import {  }
 
 const main = $('main');     // cache dla modyfikowanej zawartości (poprzez jQ); to główny kontener na którym operuje JS
 
