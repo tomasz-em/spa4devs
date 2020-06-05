@@ -1,21 +1,22 @@
-import $ from 'jQuery';
-import { navItem } from './nav-item.js';
-import { routeChange } from '../router/route-change.js';    // tylko jedna stała, by nie było konfliktów z istniejącymi nazwami lub pomyłek w wielu miejscach z osobna 
+import $ from 'jquery';
+import { routeChange } from '../router/route-change';
 import { routes } from '../router/routes';
-import { cartInfo } from './cart-info';
-import { itSpaCart } from '../cart/cart';
+import { navItem } from './nav-item';
+// PORZUCIĆ TEN WŁASNY PLIK "cart-info.js"
+// import { cartInfo } from './cart-info'; 
 
 export const nav = () => {
-    const navbar = $(`
+  const navbar = $(`
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <span class="navbar-brand">IT-SPA</span>
-        <ul class="navbar-nav mr-auto">
-
-        </ul>
+      <span class="navbar-brand">IT SPA</span>
+      <ul class="navbar-nav mr-auto"></ul>
     </nav>
-`);
+  `);
 
-    // tu powołujemy (wywołujemy) jakieś zdarzenie o własnej nazwie; też jakieś dane można podrzucić do tego
+  // PONIŻSZE PRAWDOPODOBNIE WYLĄDOWAŁO WCZEŚNEJ W ZŁYM PLIKU
+  // ... ALBO POCHODZI Z KODU TYMCZASOWEGO, EFEKTYWNIE PODMIENIONEGO...... ZAKOMENTOWANO!
+/*
+  // tu powołujemy (wywołujemy) jakieś zdarzenie o własnej nazwie; też jakieś dane można podrzucić do tego
     // najlepiej UŻYĆ STAŁEJ JAKO NAZWY DLA TEGO WŁASNEGO ZDARZENIA, celem BRAKU KONFLIKTÓW Z ISTNIEJĄCYMI ZDARZENIAMI (ich nazwami)
 
     const anchorText = "Testowe 'Booking'";
@@ -38,6 +39,7 @@ export const nav = () => {
         });    // auto-import pliku gdzie siedzi ta stała ;)
         return dynamicItem; // jawny zwrot jako dokładanie elementu do listy
     });
+    
 
     navbar.find('ul').append(navItems); // wstawienie od razu całej kolekcji 
 
@@ -45,8 +47,16 @@ export const nav = () => {
     const navCartInfo = cartInfo(cartName, () => {
         //navbar.trigger()
     });
+*/
+  // KONIEC ZAKOMENTOWANYCH TREŚCI
 
-    navbar.find('ul').append(itSpaCart());
+  // chcemy zbudowac tablice elementow navItem z odpowiednimi nazwami i callbackami
+  const navItems = routes.map( route => {
+    const { name, path } = route;
+    return navItem(name, () => navbar.trigger(routeChange, { path: path }) );
+  });
 
-    return navbar;  // zwróć cały zbudowany element z uzupełnionymi  
+  navbar.find('ul').append( navItems );
+
+  return navbar;    // zwróć cały zbudowany element z uzupełnionymi  
 };

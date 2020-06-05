@@ -1,3 +1,7 @@
+// !!!!!!!!
+// PORZUCIĆ TEN WŁASNY PLIK I WYKORZYSTAĆ PRZYKŁAD
+// !!!!!!!!
+
 // określony widok dla danego komponentu -- co ma zawierać HTML jako zwracane treści 
 import $ from 'jquery';
 import { Cart } from '../cart/cart';

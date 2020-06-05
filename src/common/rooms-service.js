@@ -1,11 +1,13 @@
 export const roomsService = {
-    // pojemnik na wszytskei funcjonalności, związane z pokojami
+    // pojemnik na wszystkie funcjonalności, związane z pokojami
 
-    getRooms() {    // pobranie listy wszystkich pokojów... z adresem do wszystkich pokoi 
+  getRooms() { // pobranie listy wszystkich pokoi... z adresem do wszystkich pokoi
+    return fetch('http://localhost:3000/rooms').then(response => response.json());
+  },
 
-        return fetch('http://localhost:3000/rooms') // to adres na wszystkie pokoje
-            // ; // = ten średnik usunąc i wstawić kilka linii poleceń z MATERIAŁÓW 
-            .then( response => response.json());
-    }
-
+  getRoom( id ) { // pobranie sczegółów wybranego pokoju z ich listy, na podstawie numeru 
+    // pobiera jeden pokoj o zadanym id
+    return fetch(`http://localhost:3000/rooms/${id}`)
+        .then( response => response.json() );   // zwróć pobrane dane 
+  }
 };
