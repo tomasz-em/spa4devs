@@ -1,22 +1,33 @@
 {
-  "name": "it-spa",
+  "name": "spa4devs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Aplikacja REST do rezerwowania pokoi oraz zabiegów. Poprzednio it-spa!",
+  "repository": {
+    "url": "https://github.com/tomasz-em/spa4devs"
+  },
+  "private": true,
+  "main": "src/it-spa.js",
   "scripts": {
     "start:db": "json-server --watch database.json",
-    "start:app": "parcel ./index.html --open"
+    "start:app": "parcel ./index.html --open",
+    "start:all": "run-p start:db start:app",
+    "build_output": "parcel build src/it-spa.js -d build/output",
+    "build_link": "parcel build src/it-spa.js --public-url ./",
+    "build_output_link": "parcel build src/it-spa.js -d build/output --public-url ./",
+    "build": "parcel build src/it-spa.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "json-server": "^0.15.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "jquery": "^3.5.0"
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.0",
+    "npm-run-all": "^4.1.5"
   }
 }

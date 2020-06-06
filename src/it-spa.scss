@@ -1,70 +1,22 @@
-* {
-    box-sizing: border-box;
-}
+// @import "...";   // SCSS import!
+// TODO: podzielić CSS na funkcjonalne porcje pomiędzy plikami, coś na kształt "partials"
+@import '../node_modules/font-awesome/scss/font-awesome.scss';  // z projektu
 
-body {
-    background-color: #f5f5f5;
-}
+@import "./sass-partials/colors";   // używane kolory
+@import "./sass-partials/page-global";  // główne style dla witryny
+@import "./sass-partials/top-navigation";   // górna belka nawigacyjna 
+@import "./sass-partials/footer";      // stopka
+@import "./sass-partials/just-for-test-styles"; // tymczasowe style do testów
+@import "./sass-partials/bootstrap-overwrite";  // style zmieniające bootstrapa...o ile będzie używany
 
-h2 {
-    text-align: center;
-}
-
-h5 {
-    text-align: center;
-    padding: 0.5rem 1rem;; 
-}
-
-p {
-    padding: 0.5rem;
-}
-
-nav a.btn {
-    font-weight: bold;
-    color: #ddd;
-}
-
-nav a.btn:hover {
-    font-weight: bold;
-    color: #a77;
-}
-
-footer {
-    background-color: #eaeaea;
-}
-
-footer ul {
-
-    list-style-type: none;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    flex: 2 1 250px;
-    flex-wrap: wrap;
-}
-
-footer ul li {
-    padding: 0.5rem 2rem;
-    background-color: #ddd;
-    /* display: inline-block; */
-}
-
-footer ul li {
-    padding: 0.5rem 1.5rem;
-    /* display: inline-block; */
-}
-
-
-footer p {
-    font-size: 0.8rem;
-    text-align: center;
-}
 
 p.error {
     color: red;
     border: 2px dashed red;
     margin: 0.5rem;
 }
+
+/* co to za style i czy ja je wszystkie popełniłem? */ 
 
 .cart {
     background-color: #444;
@@ -88,26 +40,4 @@ p.error {
 
 .cart p > span {
     font-weight: bolder;
-}
-
-/* STYLE DLA TESTÓW */
-
-.list-group-item {
-    background-color: #ddd;
-    padding: 0.5em;
-    margin: 0.5em;
-    // margin-bottom: 0.5em;
-    border-bottom: 2px solid #666;
-}
-
-.list-group-item:last-child() {
-    border-bottom: none;
-}
-
-.list-group-item:hover {
-    background-color: #eee;
-}
-
-.price {
-    color: #377337;
 }

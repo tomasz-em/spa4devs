@@ -1,0 +1,21 @@
+/* STYLE DLA TESTÓW */
+
+.list-group-item {
+    background-color: #ddd;
+    padding: 0.5em;
+    margin: 0.5em;
+    // margin-bottom: 0.5em;
+    border-bottom: 2px solid #666;
+}
+
+.list-group-item:last-child() {
+    border-bottom: none;
+}
+
+.list-group-item:hover {
+    background-color: #eee;
+}
+
+.price {
+    color: #377337;
+}

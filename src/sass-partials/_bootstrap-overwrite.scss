@@ -1,0 +1,29 @@
+navbar-brand {
+    transition: color 0.3s, background-color 0.3s;
+    // font-family: "FontAwesome";
+}
+
+navbar-brand i {
+    transition: color 0.3s, background-color 0.3s;
+    font-family: "FontAwesome";
+}
+
+navbar-brand:hover:after {
+    font-family: "FontAwesome";
+    font-size: 1.15em;
+    content: "\f121";    /* '\f121' == '<i class="fas fa-code"></i>' */
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    opacity: 1;
+}
+
+
+
+navbar-brand:hover i {
+    opacity: 0.5;
+    // font-family: "FontAwesome";
+}
+
+

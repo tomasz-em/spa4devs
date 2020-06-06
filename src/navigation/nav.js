@@ -8,7 +8,7 @@ import { navItem } from './nav-item';
 export const nav = () => {
   const navbar = $(`
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <span class="navbar-brand">SPA4DEVS</span>
+      <span class="navbar-brand">SPA4DEVS <i class="fas fa-code"></i></span>
       <ul class="navbar-nav mr-auto"></ul>
     </nav>
   `);
