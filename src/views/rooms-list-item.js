@@ -36,7 +36,7 @@ export const roomsListItem = ( anyRoom ) => {
  */
 
     // #4 UŻYCIE ES6 do budowy struktury jak powyżej.. albo każdej innej LEPSZEJ
-    const $myNewRoomHTML = `
+    const myNewRoomHTML = `
         <h4 class="room-name">
             <string>${anyRoom.name}</strong> (<span title="nr identyfikatora">#${anyRoom.id}</span>)
         </h4>
@@ -45,22 +45,25 @@ export const roomsListItem = ( anyRoom ) => {
             Miejsc dla gości: <strong>${anyRoom.guests}</strong> 
         </h5>
         <h5 class="price">
-            Cena: <strong>${anyRoom.price}<strong> zł za każdy dzień
+            Cena: <strong>${anyRoom.price}<strong> zł za każdą dobę
         </h5>
         <div class="room-booking">
-            <form id="room-booking">
-                <label for="book-date-from">Data od: </label>
-                <input type="date" name="book-date-from" id="book-date-from" min="2020-04-01" max="2021-04-01">
-                <label for="book-room-days">Ile dni: </label> 
-                <input type="number" name="book-room-days" id="book-room-days" min="0" max="14" maxlength="3" />
-                <label for="book-date-to">
-                Data do: <input type="date" name="book-date-to" id="book-date-to" min="2020-04-01" max="2021-04-01">
-                <button id="book-room" class="btn btn-primary" data-room-id="${anyRoom.id}">Rezerwuję ten pokój (${anyRoom.id})</button>
+            <form id="room-booking-${anyRoom.id}">
+                <label>Data od: 
+                    <input type="date" id="book-date-from-${anyRoom.id}" name="book-date-from-${anyRoom.id}" class="book-date-from" min="2020-04-01" max="2021-04-01">
+                </label>
+                <label>Ile dni:
+                    <input type="number" id="book-room-${anyRoom.id}-days" name="book-room-${anyRoom.id}-days" class="book-room-days" min="1" max="14" maxlength="3" />
+                </label>
+                <label>Data do: 
+                    <input type="date" id="book-date-to-${anyRoom.id}" name="book-date-to-${anyRoom.id}" class="book-date-to" min="2020-04-01" max="2021-04-01">
+                </label>    
+                <button id="book-room-${anyRoom.id}" class="btn btn-primary book-room" data-room-id="${anyRoom.id}">Rezerwuję ten pokój (${anyRoom.id})</button>
             </form>
         </div>    
     `;
 
-    $fragment.append( $myNewRoomHTML );
+    $fragment.append( myNewRoomHTML );
 
 /*     this.$fixture = $([
         "<div>",

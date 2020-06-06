@@ -29,7 +29,7 @@ export const rooms = () => {
 
   fragment
     .append('<h2>Rooms</h2>')
-    .append( roomsList() )
+    .append( roomsList() )  // wstawianie dynamicznie generowanej zawartośc (pobierana z API)
     .append('<p>Nieco losowego tekstu, by coś specyficznego dla ROOMS wyświetlić.</p>');
   return fragment;
 };

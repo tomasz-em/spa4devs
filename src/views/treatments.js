@@ -1,5 +1,6 @@
 // określony widok dla danego komponentu -- co ma zawierać HTML jako zwracane treści 
 import $ from 'jquery';
+import { treatmentsList } from './treatments-list';
 
 export const treatments = () => {
   const fragment = $( new DocumentFragment() );   // (+) WYDAJNOŚĆ:
@@ -7,6 +8,7 @@ export const treatments = () => {
   
   fragment
     .append('<h2>Treatments</h2>')
+    .append( treatmentsList() ) // dynamiczne sedno, odczytywane z serwera REST
     .append('<p>Nieco losowego tekstu, by coś specyficznego dla TREATMENTS wyświetlić.</p>');
 
   return fragment;

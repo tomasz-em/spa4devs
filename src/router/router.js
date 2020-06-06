@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { routes } from './routes';  // plik z dysku, bieżący katalog
-import { oops } from '../views';    // !!! U MNIE "oops404" BYŁO UŻYWANE - PODMIENIĆ!!!to jest powyżej 
+import { oops404 } from '../views';    // !!! U MNIE "oops404" BYŁO UŻYWANE - PODMIENIĆ!!!to jest powyżej 
 import { routeChange } from './route-change';   // auto-import ;)
 
 // jako klasę najlepiej utworzyć, bo ma mieć metody do operowania stanem (zarządza stanem aplikacji)
@@ -10,7 +10,7 @@ export class Router {   // własna klasa routera :)
   constructor() {
     this.body = $( document.body );
     this.outlet = $('main');    // główny element do wyświetlania treści; "miejsce renderowania widoku"!
-    this.routes = routes;   // lista ścieżek w aplikacji, które powinny reagować na działania, tu zostały zaimportowane z zewnątrznego pliku
+    this.routes = routes;   // lista ścieżek w aplikacji, które powinny reagować na działania, tu zostały zaimportowane z zewnętrznego pliku
   }
 
   mount( outlet ) {   // nazwa WSZYSTKICH funkcji jest własna, ma tylko dotyczyć celu
@@ -20,7 +20,7 @@ export class Router {   // własna klasa routera :)
     // dodanie nasłuchiwania na konkretne zdarzenie zmiany ścieżki (pierwsze własne zdarzenie)
     // posiadamy "kopię" <body> w jQ, zatem można do niego podpiąc to nasłuchiwanie
         // detail to, np. { path: '/booking' }
-    this.body.on(routeChange, ( event, detail ) => {   // nie tylko obiekt zdarzenia, ale też argument z danymi funckji trigger() jest przekazywany (dalej z tego ustawienia, jakiś pakunek, paczka danych) 
+    this.body.on(routeChange, ( event, detail ) => {   // nie tylko obiekt zdarzenia, ale też argument z danymi funkcji trigger() jest przekazywany (dalej z tego ustawienia, jakiś pakunek, paczka danych) 
         // console.log(evt);   // CZY COŚ SIĘ LOGUJE?
         this.navigate( detail.path );   // a te dane końcówki URLa to przekazano uprzednio do emitowania
     });
@@ -62,7 +62,7 @@ export class Router {   // własna klasa routera :)
       this.outlet.empty().append( html );
     }
     else { // coś nie tak z adresem, więc wygenerowanie strony "status-404"
-      const html = oops();
+      const html = oops404();
       this.outlet.empty().append( html );
     }
 

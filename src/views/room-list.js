@@ -1,4 +1,7 @@
-import $ from 'jquery';
+// CZY TEN PLIK JEST WYKORZYSTYWANY?! JEST DO NIEGO LINKOWANONIE?
+  // ... ZAKOMENTOWANO CAŁA TREŚĆ
+
+/* import $ from 'jquery';
 
 export const roomsList = (pokoje) => {
   const ul = $('<ul></ul>');
@@ -12,4 +15,4 @@ export const roomsList = (pokoje) => {
   ul.append(rooms);
 
   return ul;
-};
+}; */
