@@ -2,6 +2,10 @@
 
 import $ from 'jquery';
 
+    import { routeChange } from '../router/route-change';
+    import { routes } from '../router/routes'
+
+
 export const treatmentsListItem = ( anyCure ) => {
     const $li = $('<li class="list-group-item"></li>');
 
@@ -39,8 +43,23 @@ export const treatmentsListItem = ( anyCure ) => {
     `;
 
     $fragment.append( myCureHTML );
+
     $li.append( $fragment );
 
-    // console.log('KURACJA:', $li);
+    $li.find('a').on('click', ( evt ) => {
+        evt.preventDefault();
+        console.log("Cure CLICK <a>:", evt.target.href);
+         // ...?! I CO DALEJ Z TYM ŻE SIĘ LOGUJE... JAK WYKORZYSTAĆ TEN ODNOŚNIK 
+        $li.trigger(routeChange, { path: routes[2].path + "/5" , data: { treatmentID: evt.target.href } })
+    }); 
+
+    $li.find('form').on('submit', ( evt ) => {
+        evt.preventDefault();
+        console.log("Cure SUBMIT " + evt.target.tagName + ":", evt.target.lastElementChild.id); // zwrot wartości 
+         // ...?! I CO DALEJ Z TYM ŻE SIĘ LOGUJE... JAK WYKORZYSTAĆ TEN ODNOŚNIK 
+        $li.trigger(routeChange, { path: routes[2].path, data: { treatmentID: evt.target.href } })
+    }); 
+
+    console.log('KURACJA:', $li);
     return $li;
 };

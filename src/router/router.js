@@ -36,8 +36,13 @@ export class Router {   // własna klasa routera :)
   // pobieraznie obiektu z ścieżki w GET
   get( path ) {
     return this.routes.find( route => route.path === path );  // liczba mnoga dla kontenera (tablicy), w liczbie pojedynczej  
-}   // ma zwrócić to, co znajdzie ewentualnie pasujący odnośnik do tych zdefiniowanych
-    // gdy nie ma toakowego to undefined z find() jets przekazywany 
+  }   // ma zwrócić to, co znajdzie ewentualnie pasujący odnośnik do tych zdefiniowanych
+    // gdy nie ma tokowego to undefined z find() jest przekazywany 
+
+  getSubpage( path ) {
+    return this.routes.find( route => route.path.indexOf( path ) >= 0 );  // liczba mnoga dla kontenera (tablicy), w liczbie pojedynczej  
+  }   // ma zwrócić to, co znajdzie ewentualnie pasujący odnośnik do tych zdefiniowanych
+  
 
   has( path ) {
     return this.get( path ) !== undefined;    // jeśli dostaliśmy coś, bo taki jest prawidłowy odnośnik wśród zdefiniowanych, a nie "/cokolwiek", "/tajne-hasla/", "/nic666"
@@ -62,6 +67,7 @@ export class Router {   // własna klasa routera :)
       this.outlet.empty().append( html );
     }
     else { // coś nie tak z adresem, więc wygenerowanie strony "status-404"
+    console.log("BŁĄD ŚCIEŻKI", path);
       const html = oops404();
       this.outlet.empty().append( html );
     }
@@ -75,5 +81,37 @@ export class Router {   // własna klasa routera :)
 
   } // navigate-END
 
+
+  navigateSubpage( fullPath, data = {} ) { // "data" - ewentualnie kontener na przekazywanie dodatkowych danych pomiędzy widokami
+    // sciezka istnieje, mozna nawigowac
+    const slashPosition = fullPath.lastIndexOf('/');
+    const path = fullPath.substring(0, slashPosition );
+    const subpagePath = fullPath.substring( slashPosition );
+
+    if ( this.has( fullPath ) ) { // że użyto parametów w GET jako bezpiecznych; tych z listy wskazanych wartości
+      // { path: '/booking', data: {}, component: booking }
+      const { component } = this.getSubpage( fullPath );
+    // stąd dane: { path: '/bookings', data: {}, component: booking } -- z 'routes.js' to się bierze, 
+    // gdzie zdefiniowano "komplety", czyli "sparowano" komponent z konkretną końcówką danego adresu
+
+      const html = component();  // komponent(), to jakiś konretny komponent; zmienna jako referencja pobrana wraz ze zdefiniowaną ścieżką w tablicy w "routes.js"
+      // .. a to z foldera "views" zostało zaczytane; funkcja strzałkowa to jest, będzie prosty lub złożony HTML jako wynik (tam zdefiniowany)
+     
+              // A PONIŻEJ TO NALEZY TAK ZASTĄPIĆ średnik powyżej, by operowało to na promesach 
+          /*  .then( html => {
+              this.outlet.empty().append(html);
+          }) */
+          
+      this.outlet.empty().append( html );
+    }
+    else { // coś nie tak z adresem, więc wygenerowanie strony "status-404"
+      console.log("BŁĄD ŚCIEŻKI (PODSRONA)", fullPath);
+      const html = oops404();
+      this.outlet.empty().append( html );
+    }
+
+    history.pushState(data, '', fullPath); // ZMIENIA ZAWARTOŚĆ HISTORII PRZEGLĄDARKI
+
+  } // navigateSubpage-END  
 
 } // Router-class-END
