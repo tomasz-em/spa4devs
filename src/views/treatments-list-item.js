@@ -23,7 +23,7 @@ export const treatmentsListItem = ( anyCure ) => {
     const myCureHTML = `
         <h4 class="room-name">
             <string>${anyCure.name}</strong> (<span title="nr identyfikatora">#${anyCure.id}</span>)
-            - <a href="/treatments/${anyCure.id}">poznaj szczegóły kuracji</a>
+            - <a href="/treatment/${anyCure.id}">poznaj szczegóły kuracji</a>
         </h4>
         <h5>
             Obszar ciała: <strong>${anyCure.area}</strong><br />
@@ -48,16 +48,17 @@ export const treatmentsListItem = ( anyCure ) => {
 
     $li.find('a').on('click', ( evt ) => {
         evt.preventDefault();
-        console.log("Cure CLICK <a>:", evt.target.href);
+        let lastSlashPosition = evt.target.href.lastIndexOf("/") + 1;   // pominięcie "/", ważne co za tym znakiem
+        console.log("Cure CLICK <a>:", evt.target.href, "pozyskano:", evt.target.href.substring(lastSlashPosition));
          // ...?! I CO DALEJ Z TYM ŻE SIĘ LOGUJE... JAK WYKORZYSTAĆ TEN ODNOŚNIK 
-        $li.trigger(routeChange, { path: routes[2].path + "/5" , data: { treatmentID: evt.target.href } })
+        $li.trigger(routeChange, { path: routes[4].path + evt.target.href.substring(lastSlashPosition), data: { treatmentID: evt.target.href.substring(lastSlashPosition) } })
     }); 
 
     $li.find('form').on('submit', ( evt ) => {
         evt.preventDefault();
         console.log("Cure SUBMIT " + evt.target.tagName + ":", evt.target.lastElementChild.id); // zwrot wartości 
          // ...?! I CO DALEJ Z TYM ŻE SIĘ LOGUJE... JAK WYKORZYSTAĆ TEN ODNOŚNIK 
-        $li.trigger(routeChange, { path: routes[2].path, data: { treatmentID: evt.target.href } })
+        $li.trigger(routeChange, { path: routes[4].path, data: { treatmentID: evt.target.href } })
     }); 
 
     console.log('KURACJA:', $li);

@@ -7,10 +7,10 @@ export const routes = [ // co ma zawierać pojedyncza ścieżka
 
     // "data" jako mozliwość przekazania (dodatkowych) danych pomiędzy widokami, gdy się będzie wędrować między nimi
     // "component" - jaki własny komponent ma być domyślnie używany?! i wyrenderowany (referencja do danej funkcji strzałkowej)
-  { name: 'Home', path: '/', data: {}, component: home },   // strona główna, początek wędrówki
-  { name: 'Rooms', path: '/rooms', data: {}, component: rooms },  // np. lista pokoi do wyboru
-  { name: 'Treatments', path: '/treatments', data: {}, component: treatments }, // np. lista zabiegów
-  { name: 'Booking', path: '/booking', data: {}, component: booking }   // logika rezerwacji/wykupu usługi
+  { name: 'Home', type: 'nav', path: '/', data: {}, component: home },   // strona główna, początek wędrówki
+  { name: 'Rooms', type: 'nav', path: '/rooms', data: {}, component: rooms },  // np. lista pokoi do wyboru
+  { name: 'Treatments', type: 'nav', path: '/treatments', data: {}, component: treatments }, // np. lista zabiegów
+  { name: 'Booking', type: 'nav', path: '/booking', data: {}, component: booking },   // logika rezerwacji/wykupu usługi
          // ...      // rozszerzenie aplikacji o kolejne adresy do obsługi
-  //, { name: '', path: '/treatments/', data: { treatmentID : 1 }, component: treatments } // np. szczegóły DANEGO zabiegu
+  { name: 'Treatment Details', type: 'treatment-details', path: '/treatment/', data: { treatmentID : 1 }, component: treatments } // np. szczegóły DANEGO zabiegu
 ];
