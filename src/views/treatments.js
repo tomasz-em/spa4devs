@@ -2,6 +2,7 @@
 import $ from 'jquery';
 import { treatmentsList, detailedTreatment } from './treatments-list';
 
+
 export const treatments = () => {
   const $fragment = $( new DocumentFragment() );   // (+) WYDAJNOŚĆ:
   //...brak ciągłych operacji na DOM, przy kolejnej operacji na każdym z nowo dostawianych z osobna elementów lub ich modyfikowaniu (np. atrybuty, itp.)

@@ -16,9 +16,16 @@
     "start:dev": "run-p start:db start:www",
     "start:dev_old": "run-p start:old_db start:www",
     "build_output": "parcel build src/it-spa.js -d build/output",
-    "build_link": "parcel build src/it-spa.js --public-url ./dist",
+    "build_link": "parcel build src/it-spa.js --public-url ./dist/",
+    "build_link2": "parcel build src/it-spa.js --public-url ./",
+    "build_link3": "parcel build src/it-spa.js --public-url dist",
+    "build_link4": "parcel build src/it-spa.js --public-url ./dist",
     "build_output_link": "parcel build src/it-spa.js -d build/output --public-url build/output",
-    "build": "parcel build src/it-spa.js"
+    "build_output_link2": "parcel build src/it-spa.js -d build/output --public-url ./",
+    "build_output_link3": "parcel build src/it-spa.js -d build/output --public-url ./build/output",
+    "build": "parcel build src/it-spa.js",
+    "build:default": "parcel build entry.js",
+    "start:build": "parcel ./index.html -p 3456"
   },
   "keywords": [],
   "author": "",
@@ -26,12 +33,13 @@
   "devDependencies": {
     "json-server": "^0.15.1",
     "node-sass": "^4.14.1",
-    "parcel-bundler": "^1.12.4"
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-entry": "^1.0.1"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.5.0",
-    "npm-run-all": "^4.1.5"
+    "jquery": "^3.5.0"
   }
 }

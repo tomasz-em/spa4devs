@@ -3,11 +3,13 @@
 @import '../node_modules/font-awesome/scss/font-awesome.scss';  // z projektu
 
 @import "./sass-partials/colors";   // używane kolory
+@import "./sass-partials/bootstrap-overwrite";  // style zmieniające bootstrapa...o ile będzie używany
 @import "./sass-partials/page-global";  // główne style dla witryny
-@import "./sass-partials/top-navigation";   // górna belka nawigacyjna 
+@import "./sass-partials/top-navigation";   // górna belka nawigacyjna
+@import "./sass-partials/treatment";
 @import "./sass-partials/footer";      // stopka
 @import "./sass-partials/just-for-test-styles"; // tymczasowe style do testów
-@import "./sass-partials/bootstrap-overwrite";  // style zmieniające bootstrapa...o ile będzie używany
+
 
 
 p.error {

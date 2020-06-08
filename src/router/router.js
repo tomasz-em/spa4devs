@@ -23,10 +23,12 @@ export class Router {   // własna klasa routera :)
     this.body.on(routeChange, ( event, detail ) => {   // nie tylko obiekt zdarzenia, ale też argument z danymi funkcji trigger() jest przekazywany (dalej z tego ustawienia, jakiś pakunek, paczka danych) 
         // console.log(evt);   // CZY COŚ SIĘ LOGUJE?
         this.navigate( detail.path );   // a te dane końcówki URLa to przekazano uprzednio do emitowania
+          // history.popState({}, '', detail.path); // ?!
     });
 
     // TODO: uzyj zdarzenia 'popstate', aby wyrenderowac odpowiednia
     // sciezke, gdy uzytkownik klika Wstecz (<-) lub Naprzod (->)
+        // history.popState({}, '', detail.path); // ?!
   } // mount-END
 
   init() {    // użyteczne w przypisaniu czegoś od razu do paska adresu (jeśli np. jesteśmy w jakiejś podstronie)
@@ -40,7 +42,11 @@ export class Router {   // własna klasa routera :)
     // gdy nie ma tokowego to undefined z find() jest przekazywany 
 
   getSubpage( path ) {
-    return this.routes.find( route => route.path.indexOf( path ) >= 0 );  // liczba mnoga dla kontenera (tablicy), w liczbie pojedynczej  
+    return this.routes.find( route => {
+      let condition = route.path.indexOf( path ) >= 0;
+      console.log("PATH:", path, "ROUTE:", route, "CONDITION:", condition );
+      return condition;
+    });  // liczba mnoga dla kontenera (tablicy), w liczbie pojedynczej  
   }   // ma zwrócić to, co znajdzie ewentualnie pasujący odnośnik do tych zdefiniowanych
   
 
