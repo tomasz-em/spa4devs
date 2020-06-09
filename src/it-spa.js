@@ -6,8 +6,12 @@ import $ from 'jquery';     // skoro używamyj Query, to przed pierwszym odwoła
 import { Router } from './router/router';   // a to najważniejsza zdefiniowana klasa do obsługi tej witryny SPA - zasób lokalny z dysku
 import { nav } from './navigation/nav'; // potrzebny import komponentu
 import { addTreatment } from './router/add-treatment';
+// import { itSpaCart } from './cart/it-spa-cart';
+import { Cart } from './cart/cart';
 
 // import {  }
+let someValue = 0;
+// let myCart = new Cart();
 
 const $main = $('main');     // cache dla modyfikowanej zawartości (poprzez jQ); to główny kontener na którym operuje JS
 
@@ -21,9 +25,20 @@ router.init();  // nawigacja na podstawie już wpisanej ścieżki w pasku adresu
 
     // dynamiczna nawigacja leci powyżej <main>, aby by się cały czas nie pojawiał od nowa, gdy będzie zmiana adresu
 $main.on(addTreatment, ( evt, data ) => {
-    let $newTreatment = $('<h4>').html(`Dodano <strong>${data.totalNumber}</strong> zabieg/zabiegów typu <strong>${data.name}</strong>`);
+    let $newTreatment = $('<h4>').html(`${++someValue}. Dodano <strong>${data.totalNumber}</strong> zabieg/zabiegów typu <strong>${data.name}</strong>`);
     console.log("ZDARZENIE_" + addTreatment +"_:", evt, data);
     $main.prepend( $newTreatment );
+
+    let myCart = new Cart();
+    let addedTreatment = { 
+        tID: data.ID, 
+        tQuantity: data.totalNumber
+    };
+
+    console.log( myCart );
+    // !!!
+    // ! myCart.addItem( addedTreatment );   // TA METODA DODANIA NIE ZADZIAŁA! NIE ISTNIEJE "CART", CZY METODY W NIM NIE PRZYJMUJĄ OBIEKTÓW?!
+    // !!!
 });
 
 $main.before( nav() );   // wstawienie PRZED z wywołaniem funkcji jako komponentu 

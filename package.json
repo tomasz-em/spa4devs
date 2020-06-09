@@ -25,7 +25,12 @@
     "build_output_link3": "parcel build src/it-spa.js -d build/output --public-url ./build/output",
     "build": "parcel build src/it-spa.js",
     "build:default": "parcel build entry.js",
-    "start:build": "parcel ./index.html -p 3456"
+    "start:build": "parcel ./index.html -p 3456",
+    "build:all": "parcel build index.html",
+    "build:all2": "parcel build index.html --public-url ./dist",
+    "build:all3": "parcel build index.html --public-url ./",
+    "build:all4": "parcel build index.html --public-url ./dist/",
+    "build:all5": "parcel build index.html --public-url dist"
   },
   "keywords": [],
   "author": "",

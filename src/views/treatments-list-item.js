@@ -36,7 +36,7 @@ export const treatmentsListItem = ( anyCure ) => {
         <div class="treatment-booking">
             <form id="treatment-booking" data-cure-id="${anyCure.id}">
                 <label>Ile zabiegów:
-                    <input type="text" id="select-cure-n-times-${anyCure.id}" name="select-cure-n-times-${anyCure.id}" class="select-cure-n-times" min="1" max="28" maxlength="2" value="1" />
+                    <input type="number" id="select-cure-n-times-${anyCure.id}" name="select-cure-n-times-${anyCure.id}" class="select-cure-n-times" min="1" max="28" maxlength="2" value="1" />
                 </label>
                 <button id="buy-cure-${anyCure.id}" class="btn btn-primary buy-cure" data-cure-id="${anyCure.id}">Dodaję zabieg (${anyCure.id})</button>
                 <p class="d-none error-text">
@@ -69,6 +69,7 @@ export const treatmentsListItem = ( anyCure ) => {
         console.log("Cure SUBMIT:", evt.target.lastElementChild.id, "x", numberOfTreatments, "FORMULARZ:", evt.target); // zwrot wartości 
 
         if ( numberOfTreatments > 0 ) {
+    // animacje jQuery nie za bardzo "lubią się' z  bootstrapem, zwłaszcza z klasami "d-none" i "d-block"...
             /* $warningText.hide(300, () => { */ $warningText.addClass('d-none').removeClass('d-block'); /* }); */
             console.log('WYKONYWANIE DOPISYWANIA ZABIEGU...');
             $eventElem.trigger(addTreatment, { totalNumber: numberOfTreatments, name: treatmentName, ID: treatmentID });

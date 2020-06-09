@@ -2,18 +2,21 @@ export class Cart {
 
   constructor() {
         // ustawienie klucza/hasha, pod którym będzie przechowywana zawartość koszyka
-        this.key = 'IT_SPA_CART';   // to będzie zawierać tablicę z poszczególnymi zabiegami/wybraną ofertą
+    this.key = 'SPA4DEVS_CART';   // to będzie zawierać tablicę z poszczególnymi zabiegami/wybraną ofertą
         
+    if ( !this.exists() ) {
+      this.empty();
+    }
         // this.itemsAdded = 0;    // zliczacz elementów dodanych do koszyka
-        /* 
+         
         // podpięcie w dolwnym miejscu kodu, najlepiej przy tworzeniu obiektu
-        cookieStore.addEventListener('change', (event) => {  // gdy się coś zmieni (change) w liście cistek bieżacej witryny
+/*         document.cookies.cookieStore.addEventListener('change', (event) => {  // gdy się coś zmieni (change) w liście cistek bieżacej witryny
             // to jakąś reakcję wykonać, np. odczytaać ponownie (odświeżyć) tę listę z ciastek do zbioru danych JS  
             console.log(event);
 
-            const  newCart = cart 
-        } );    */
-    }   // constructor-END
+            //const  newCart = cart 
+        }); */
+  }   // constructor-END
 
   cookie() {
     // PRZED: 'key1=val1; key2=val2; . . .'
@@ -35,13 +38,13 @@ export class Cart {
         // pobranie tylko elementu z indeksem 1, TYLKO żądaną wartość z drugiego elemntu tej małej tablicy
       const cookieValue = itSpaCookie.split('=')[1]; // ['IT_SPA_CART', '[1,2,2]']
         // jakoś zamienić te dane z ciastek na coś co będzie strukturą danych; na podstawie tekstu opisująceg dane... coś jak JSON lub/i jego metoda parse() 
-      const parsedValue = JSON.parse(cookieValue); // seria transformacji na danych WE, by konkretną wartość odczytać
+      const parsedValue = JSON.parse( cookieValue ); // seria transformacji na danych WE, by konkretną wartość odczytać
 
       return parsedValue;   // zwróc, gdy istnieje
     } 
     else {
-        this.empty();   // to ma utworzyć puste ciastko, bez zawartości... aby nie było zaskoczenia przy odczycie bez zapisania zawartości
-        // od teraz to albo jakieś wartości są zwracane albo pusta tablica... nie ma undefined
+      this.empty();   // to ma utworzyć puste ciastko, bez zawartości... aby nie było zaskoczenia przy odczycie bez zapisania zawartości
+      // od teraz to albo jakieś wartości są zwracane albo pusta tablica... nie ma undefined
     }
   } //get-END
 
@@ -55,8 +58,33 @@ export class Cart {
     this.set([]);   // pusta tablica jako wartość!
   }
 
-  // METODA DODANA TESTOWO
-/*   howManyItemsAdded() {
-    return this.itemsAdded;
-  } */
+  totalItemsAdded() {
+    const totalCookieItems = this.cookie();
+
+    return totalCookieItems === undefined ? 0 : totalCookieItems.length;
+  }
+
+  getQuantityOfItems( type ) {
+    const filteredCart = this.get().filter( item => item.name === type );
+    return filteredCart.length;
+  }
+
+  addItem( item ) {
+    // dodaje produkt do koszyka
+    let currentCartValues = this.get();
+    // let nextValues = [ ...currentCartValues, item ];
+    this.set([ ...currentCartValues, item ]);
+  }
+
+  removeItem( item ) {
+    // usuwa produkt z koszyka
+    const currentCartValues = this.get();
+    const itemInCart = currentCartValues.findIndex( val => val.name === item.name );
+
+    if( itemInCart !== -1 ) {
+      currentCartValues.splice(itemInCart, 1);
+      this.set(currentCartValues);
+    }
+  }
+
 }

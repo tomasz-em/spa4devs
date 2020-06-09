@@ -7,3 +7,30 @@ nav a.btn:hover {
     font-weight: bold;
     color: #a77;
 }
+
+
+/* style od koszyka... pierwsza wersja */
+
+.cart {
+    color: #dd5;
+    font-weight: bolder;
+}
+
+.cart h3 {
+    margin-bottom: 0;
+}
+
+.cart p {
+    display: none;
+    margin: 0;
+    padding: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.cart:hover p {
+    display: block;
+}
+
+.cart p > span {
+    font-weight: bolder;
+}

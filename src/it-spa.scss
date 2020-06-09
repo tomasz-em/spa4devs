@@ -18,28 +18,3 @@ p.error {
     margin: 0.5rem;
 }
 
-/* co to za style i czy ja je wszystkie popełniłem? */ 
-
-.cart {
-    background-color: #444;
-    color: #dd5;
-}
-
-.cart h3 {
-    margin-bottom: 0;
-}
-
-.cart p {
-    display: none;
-    margin: 0;
-    padding: 0.25rem;
-    font-size: 0.8rem;
-}
-
-.cart:hover p {
-    display: block;
-}
-
-.cart p > span {
-    font-weight: bolder;
-}
