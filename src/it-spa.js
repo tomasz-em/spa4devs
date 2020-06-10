@@ -37,7 +37,7 @@ $main.on(addTreatment, ( evt, data ) => {
 
     console.log( myCart );
     // !!!
-    // ! myCart.addItem( addedTreatment );   // TA METODA DODANIA NIE ZADZIAŁA! NIE ISTNIEJE "CART", CZY METODY W NIM NIE PRZYJMUJĄ OBIEKTÓW?!
+    myCart.addItem( addedTreatment );   // TA METODA DODANIA NIE ZADZIAŁA! NIE ISTNIEJE "CART", CZY METODY W NIM NIE PRZYJMUJĄ OBIEKTÓW?!
     // !!!
 });
 

@@ -4,11 +4,18 @@ import $ from 'jquery';
 
     import { routeChange } from '../router/route-change';
     import { addTreatment } from '../router/add-treatment';
-    import { routes } from '../router/routes'
+    import { routes } from '../router/routes';
+    import { Cart } from '../cart/cart';
 
 
 export const treatmentsListItem = ( anyCure ) => {
     const $li = $('<li class="list-group-item"></li>');
+
+    const myCart = new Cart();
+    const isTreatmentAlreadyInCart = myCart.isElementPresentInCookies('tID', anyCure.id);
+    console.log("ZABIEG "+ anyCure.id + " obecny w elemencie?", isTreatmentAlreadyInCart, this );
+        if ( isTreatmentAlreadyInCart ) $li.addClass('treatment-present');
+        else $li.removeClass('treatment-present');  // na wszelki wypadek... ale wariant nie wystąpi...
 
     const $fragment = $( new DocumentFragment() );
 

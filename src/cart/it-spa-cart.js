@@ -8,7 +8,7 @@ export const itSpaCart = () => {
   
     // MIAŁEM COŚ TAKIEGO JAKO TREŚC... i tak generowało bład
 
-    const $cartWidget = $(`<li class="cart" id="cart">Koszyk (<span class="count">${ cart.totalItemsAdded() }</span>) <i class="fas fa-shopping-cart"></i></li>`);
+    const $cartWidget = $(`<li class="cart" id="cart">Koszyk (<span class="count">${ cart.getQuantityOfItems() }/${ cart.totalItemsAdded() }</span>) <i class="fas fa-shopping-cart"></i></li>`);
 
     console.info("TWORZENIE KOSZYKA (cart): ", cart); //, "cookies:", cookiesStore );
         // "browser" - przeglądarka na to protestuje

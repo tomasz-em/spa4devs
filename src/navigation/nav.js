@@ -6,12 +6,16 @@ import { navItem } from './nav-item';
 import { itSpaCart as myCart } from '../cart/it-spa-cart'; 
 
 export const nav = () => {
-  const navbar = $(`
+  const $navbar = $(`
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <span class="navbar-brand">SPA4DEVS <i class="fas fa-code"></i></span>
+      <a><span class="navbar-brand">SPA4DEVS <i class="fas fa-code"></i></span></a>
       <ul class="navbar-nav mr-auto"></ul>
     </nav>
   `);
+
+  $navbar.find('a:first, .navbar-brand').on('click', (evt) => {
+    $( evt.target ).trigger( routeChange, { path: "/" });   // !!! WŁĄSCIWY OBIEKT ZDARZENIA - domyślnie jest reakcja na $(this), ale tutaj na "evt.target" !!!
+  });
 
   // PONIŻSZE PRAWDOPODOBNIE WYLĄDOWAŁO WCZEŚNEJ W ZŁYM PLIKU
   // ... ALBO POCHODZI Z KODU TYMCZASOWEGO, EFEKTYWNIE PODMIENIONEGO...... ZAKOMENTOWANO!
@@ -54,13 +58,13 @@ export const nav = () => {
   let navItems = routes.filter( route => route.type == "nav" );
   navItems = navItems.map( route => { //przypsanie do tego samego elementu
     const { name, path } = route;
-    console.log("NAV:", route);
-    return navItem(name, () => navbar.trigger(routeChange, { path: path }) );
+    // console.log("NAV:", route);
+    return navItem(name, () => $navbar.trigger(routeChange, { path: path }) );
   });
 
-  navbar.find('ul').append( navItems ).append( myCart );  // i od razu doklejenie koszyka
+  $navbar.find('ul').append( navItems ).append( myCart );  // i od razu doklejenie koszyka
 
  // navbar.append( myCart );  // doklejenie koszyka
 
-  return navbar;    // zwróć cały zbudowany element z uzupełnionymi  
+  return $navbar;    // zwróć cały zbudowany element z uzupełnionymi  
 };
