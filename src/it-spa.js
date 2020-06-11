@@ -31,8 +31,8 @@ $main.on(addTreatment, ( evt, data ) => {
 
     let myCart = new Cart();
     let addedTreatment = { 
-        tID: data.ID, 
-        tQuantity: data.totalNumber
+        tID: data.ID,   // "treatmentID"
+        tQ: data.totalNumber // "treatmentQuantity"
     };
 
     console.log( myCart );

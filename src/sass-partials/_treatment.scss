@@ -19,10 +19,17 @@
     color: #377337;
 }
 
+.remove-cure {
+    display: none;
+}
 
 .treatment-present.list-group-item { /* dodatkowa klasa, by bootstrapa przeważyć  */
     background-color: rgba(168, 247, 168, 0.3);
     position: relative;
+
+    &:hover {
+        background-color: rgba(168, 247, 168, 0.5);
+    }
 
     &:hover::after,
     &::after {
@@ -45,6 +52,10 @@
     &:hover::after {
         background-color: rgba(168, 247, 168, 0.75); // == #a8f7a8
         color: darken($color: #a8f7a8, $amount: 38);
+    }
+
+    .remove-cure {
+        display: inline;
     }
 
 }
