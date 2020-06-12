@@ -3,7 +3,7 @@ import { routeChange } from '../router/route-change';
 import { routes } from '../router/routes';
 import { navItem } from './nav-item';
 // PORZUCIĆ TEN WŁASNY PLIK "cart-info.js"
-import { itSpaCart as myCart } from '../cart/it-spa-cart'; 
+import { itSpaCart as myCart, cartSummary } from '../cart/it-spa-cart'; 
 
 export const nav = () => {
   const $navbar = $(`
@@ -62,9 +62,9 @@ export const nav = () => {
     return navItem(name, () => $navbar.trigger(routeChange, { path: path }) );
   });
 
-  $navbar.find('ul').append( navItems ).append( myCart );  // i od razu doklejenie koszyka
+    // DO LISTY NAWIGACYJNEJ OD RAZU PODPINANY JEST PRZYCISK/IKONA KOSZYKA ORAZ PODSUMOWANIE ZAMÓWIENIA!
+  $navbar.find('ul').append( navItems ).append( myCart() ).parent().append( cartSummary() );  // <-- tu "doklejanie" elementów zewnętrznych
+    // PRAWIDŁOWO DOŁĄCZANE ELEMENTY Z ZEWNĘTRZNYCH ZASOBÓW/PLIKÓW - WYWOŁYWANE JAKO WŁAŚCIWE FUNKCJE I WSTAWIANE OD RAZU!
 
- // navbar.append( myCart );  // doklejenie koszyka
-
-  return $navbar;    // zwróć cały zbudowany element z uzupełnionymi  
+  return $navbar;    // zwróć cały zbudowany element z uzupełnionymi treściami dla elementów i PODPIĘTYMI ZDARZENIAMI do nich
 };

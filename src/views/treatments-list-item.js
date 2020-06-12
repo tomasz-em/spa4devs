@@ -48,7 +48,7 @@ export const treatmentsListItem = ( anyCure ) => {
                 <label>Ile zabiegów:
                     <input type="number" id="select-cure-n-times-${anyCure.id}" name="select-cure-n-times-${anyCure.id}" class="select-cure-n-times" min="0" max="28" maxlength="2" value="${alreadyOrderedQuantity}" />
                 </label>
-                <button id="buy-cure-${anyCure.id}" class="btn btn-primary buy-cure" data-cure-id="${anyCure.id}">Dodaję ten zabieg</button>
+                <button id="buy-cure-${anyCure.id}" class="btn btn-primary buy-cure" data-cure-id="${anyCure.id}" data-cure-price="${anyCure.price}">Dodaję ten zabieg</button>
                 <button id="remove-cure-${anyCure.id}" class="btn btn-secondary remove-cure" data-cure-id="${anyCure.id} data-cure-q="${alreadyOrderedQuantity}">Usuń zabieg (${alreadyOrderedQuantity})</button>
                 <p class="d-none error-text">
                     Podaj właściwą liczbę zabiegów (oczekiwana wartość od 1 do 28)
@@ -88,6 +88,7 @@ export const treatmentsListItem = ( anyCure ) => {
         const $eventElem = $( evt.target );
         const treatmentName = $eventElem.parents('li').find('h4 > strong').first().text();
         const treatmentID = parseInt( $eventElem.find('.buy-cure').data('cure-id'), 10 );
+        const treatmentPrice = parseInt( $eventElem.find('.buy-cure').data('cure-price'), 10 );
         let numberOfTreatments = parseInt( $eventElem.find('input.select-cure-n-times').val(), 10 );
         let $warningText = $eventElem.find('p.error-text');
         numberOfTreatments = isNaN( numberOfTreatments ) ? numberOfTreatments = 0 : numberOfTreatments; // dodatkowa weryfikacja
@@ -105,7 +106,7 @@ export const treatmentsListItem = ( anyCure ) => {
             $eventElem.find('.select-cure-n-times').val(0); // zerowanie zawartosci pola wyboru  
             $eventElem.find('.remove-cure').text(`Usuń zabieg (${numberOfTreatments})`);
             console.log('WYKONYWANIE DOPISYWANIA ZABIEGU - WŁASNE zdarzenie...');   // ale przeciez można od razu operowoć na koszyku, bez tworzenia włąsnego zdarzenia
-            $eventElem.trigger(addTreatment, { totalNumber: numberOfTreatments, name: treatmentName, ID: treatmentID });
+            $eventElem.trigger(addTreatment, { totalNumber: numberOfTreatments, name: treatmentName, ID: treatmentID, price: treatmentPrice });
         } 
         else {
             /* $warningText.show(300), () => { */ 

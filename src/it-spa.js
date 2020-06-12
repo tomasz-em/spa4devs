@@ -32,7 +32,9 @@ $main.on(addTreatment, ( evt, data ) => {
     let myCart = new Cart();
     let addedTreatment = { 
         tID: data.ID,   // "treatmentID"
-        tQ: data.totalNumber // "treatmentQuantity"
+        tQ: data.totalNumber, // "treatmentQuantity"
+        tP: data.price,     // "treatmentPrice"
+        tN: data.name   // "treatmentName"
     };
 
     console.log( myCart );

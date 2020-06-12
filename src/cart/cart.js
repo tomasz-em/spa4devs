@@ -1,3 +1,8 @@
+import $ from 'jquery';
+import { cartSummary } from './it-spa-cart';
+import { roomsService } from '../common/rooms-service';
+import { treatmentsService } from '../common/treatments-service';
+
 export class Cart {
 
   constructor() {
@@ -88,6 +93,7 @@ export class Cart {
     if ( foundFromCart ) {  // !!! .find() zwraca PASUJĄCY_ELEMENT lub undefined !!!
       foundedQuantity = foundFromCart[requestedQuantityKey]; // odczytanie innego kluca, jeśli w obiekcie istnieje określony atrybut "tID" | "rID"
     }
+    console.log('ID', requestedID, 'typID: "' + requestedIDKey +'", typIlości "' + requestedQuantityKey + '", WARTOŚĆ ==' , foundedQuantity);
     return foundedQuantity; // zapisana już ilośc zabiegów
   }
 
@@ -115,11 +121,10 @@ export class Cart {
     // this.set([ ...currentCartValues, item ]);  // zwykłew dodawanie kolejnych wartości
     this.set([ ...anyOtherCurrentValues, item ]); // doaje wartość
     console.log("ciastka PO dodaniu_el", this.cookie(), "wartości_odczytane", currentCartValues, "nowy_el", item );
-    // sprawdzić getem | cookisem
+    this.updateCartAndCartSummary();  // aktualizaicja ilościowa po udanym działaniu
   }
 
-  removeItem( item ) {
-    // usuwa produkt z koszyka
+  removeItem( item ) {    // usuwa produkt z koszyka
     const currentCartValues = this.get();
     const itemInCart = currentCartValues.findIndex( val => val.name === item.name );
 
@@ -137,8 +142,35 @@ export class Cart {
     if ( itemInCart !== -1 ) {
       currentCartValues.splice(itemInCart, 1);
       this.set( currentCartValues );
+      this.updateCartAndCartSummary();  // aktualzaicja ilościowa po udanym działaniu
     }
   }
 
+  updateCartAndCartSummary() {  // aktualizuje przycik/ikonę kosza oraz jego szczegółową zawartość
+    const $cartWidgetQuantity = $('.cart-count');
+    const cartQuantity = this.getQuantityOfItems('tID') + this.getQuantityOfItems('rID');
+    $cartWidgetQuantity.text( cartQuantity );
+    const $cartSummary = cartSummary();
+    $('.cart-summary').remove();  // kasowanie poprzedniej zawartości
+    $('nav').append( cartSummary() );
+  }
 
-}
+  showCartSummaryOnHover( incomingAction ) {
+    const $cartSummary = $('.cart-summary');
+    if ( incomingAction == 'show' ) $cartSummary.addClass('show-summary')
+    if ( incomingAction == 'hide' ) $cartSummary.removeClass('show-summary');
+    if ( incomingAction == 'click' ) $cartSummary.toggleClass('summary-enabled');
+    // if ( incomingAction == 'hide-all' ) $cartSummary.removeClass('show-summary').removeClass('summary-enabled');  // wymuszenie wykonania obu akcji
+  }
+
+  fullInfoAboutRoom( roomID ) {
+    return roomsService.getRoom( roomID );
+   
+  }
+
+  fullInfoAboutTreatment( treatmentID ) {
+    return treatmentsService.getTreatment( treatmentID );
+  }
+
+
+} // Cart-END
